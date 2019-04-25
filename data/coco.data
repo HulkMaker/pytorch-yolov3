@@ -1,0 +1,7 @@
+classes= 80
+#train  = /home/common/datasets/coco/trainvalno5k.txt
+valid  = /home/common/datasets/coco/5k.txt
+names = data/coco.names
+backup = backup
+eval=coco
+
