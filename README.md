@@ -1,3 +1,5 @@
+# pytorch-yolov3
+(cocoapi mAP计算在最下方↓↓↓)
 
 # Introduction
 
@@ -5,7 +7,7 @@ This directory contains python software and an iOS App developed by Ultralytics 
 
 # Description
 
-The https://github.com/ultralytics/yolov3 repo contains inference and training code for YOLOv3 in PyTorch. The code works on Linux, MacOS and Windows. Training is done on the COCO dataset by default: https://cocodataset.org/#home. **Credit to Joseph Redmon for YOLO:** https://pjreddie.com/darknet/yolo/.
+The https://github.com/muyiguangda/pytorch-yolov3 repo contains inference and training code for YOLOv3 in PyTorch. The code works on Linux, MacOS and Windows. Training is done on the COCO dataset by default: https://cocodataset.org/#home. **Credit to Joseph Redmon for YOLO:** https://pjreddie.com/darknet/yolo/.
 
 # Requirements
 
@@ -93,16 +95,15 @@ Run `detect.py` with `webcam=True` to show a live webcam feed.
 
 # mAP
 
+``` bash
+sudo rm -rf pytorch-yolov3 && git clone https://github.com/muyiguangda/pytorch-yolov3
+# bash pytorch-yolov3/data/get_coco_dataset.sh
+sudo rm -rf cocoapi && git clone https://github.com/cocodataset/cocoapi && cd cocoapi/PythonAPI && make && cd ../.. && cp -r cocoapi/PythonAPI/pycocotools pytorch-yolov3
+cd pytorch-yolov3
+```
 - Use `python coco_predict.py --weights weights/yolov3.weights` to test the official YOLOv3 weights.
 - Use `python coco_predict.py --weights weights/latest.pt` to test the latest training results.
 - Use `python coco_predict.py --save-json --conf-thres 0.001 --img-size 416 --batch-size 16` to modify configuration.
 - Compare to darknet published results https://arxiv.org/abs/1804.02767.
 
-
-``` bash
-sudo rm -rf yolov3 && git clone https://github.com/ultralytics/yolov3
-# bash yolov3/data/get_coco_dataset.sh
-sudo rm -rf cocoapi && git clone https://github.com/cocodataset/cocoapi && cd cocoapi/PythonAPI && make && cd ../.. && cp -r cocoapi/PythonAPI/pycocotools yolov3
-cd yolov3
-```
-
+# pytorch-yolov3
