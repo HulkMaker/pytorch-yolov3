@@ -1,23 +1,7 @@
-<table style="width:100%">
-  <tr>
-    <th>v2.2<img src="https://user-images.githubusercontent.com/26833433/52743528-e6096300-2fe2-11e9-970c-5fee45769fab.jpg" width="400"></th>
-        <th>v3.0<img src="https://user-images.githubusercontent.com/26833433/54523854-227d0580-4979-11e9-9801-26a3be239875.jpg" width="400"></th>
-    <th>
-      <a href="https://www.ultralytics.com" target="_blank">
-      <img src="https://storage.googleapis.com/ultralytics/logo/logoname1000.png" width="200">
-      </a>
-  <p> 
-    <a href="https://itunes.apple.com/app/id1452689527" target="_blank">
-    <img src="https://user-images.githubusercontent.com/26833433/50044365-9b22ac00-0082-11e9-862f-e77aee7aa7b0.png" width="180"> 
-    </a> 
-  </p></th> 
-  </tr>
-</table>
-
 
 # Introduction
 
-This directory contains python software and an iOS App developed by Ultralytics LLC, and **is freely available for redistribution under the GPL-3.0 license**. For more information please visit https://www.ultralytics.com.
+This directory contains python software and an iOS App developed by Ultralytics LLC, and **is freely available for redistribution under the GPL-3.0 license**. 
 
 # Description
 
@@ -116,37 +100,10 @@ Run `detect.py` with `webcam=True` to show a live webcam feed.
 
 # mAP
 
-- Use `test.py --weights weights/yolov3.weights` to test the official YOLOv3 weights.
-- Use `test.py --weights weights/latest.pt` to test the latest training results.
-- Compare to darknet published results https://arxiv.org/abs/1804.02767.
+- Use `coco_predict.py --weights weights/yolov3.weights` to test the official YOLOv3 weights.
+- Use `coco_predict.py --weights weights/latest.pt` to test the latest training results.
 
-<!---
-%<i></i> | ultralytics/yolov3 OR-NMS 5:52@416 (`pycocotools`) | darknet  
---- | --- | ---  
-YOLOv3-320 | 51.9 (51.4) | 51.5  
-YOLOv3-416 | 55.0 (54.9) | 55.3  
-YOLOv3-608 | 57.5 (57.8) | 57.9  
 
-<i></i> | ultralytics/yolov3 MERGE-NMS 7:15@416 (`pycocotools`) | darknet  
---- | --- | ---  
-YOLOv3-320 | 52.3 (51.7) | 51.5  
-YOLOv3-416 | 55.4 (55.3) | 55.3  
-YOLOv3-608 | 57.9 (58.1) | 57.9  
-
-<i></i> | ultralytics/yolov3 MERGE+earlier_pred4 8:34@416 (`pycocotools`) | darknet  
---- | --- | ---  
-YOLOv3-320 | 52.3 (51.8) | 51.5  
-YOLOv3-416 | 55.5 (55.4) | 55.3  
-YOLOv3-608 | 57.9 (58.2) | 57.9  
---->
-<i></i> | [ultralytics/yolov3](https://github.com/ultralytics/yolov3) | [darknet](https://arxiv.org/abs/1804.02767) 
---- | --- | ---  
-`YOLOv3 320` | 51.8 | 51.5  
-`YOLOv3 416` | 55.4 | 55.3  
-`YOLOv3 608` | 58.2 | 57.9  
-`YOLOv3-spp 320` | 52.4 | -  
-`YOLOv3-spp 416` | 56.5 | -  
-`YOLOv3-spp 608` | 60.7 | 60.6  
 
 ``` bash
 sudo rm -rf yolov3 && git clone https://github.com/ultralytics/yolov3
@@ -154,49 +111,8 @@ sudo rm -rf yolov3 && git clone https://github.com/ultralytics/yolov3
 sudo rm -rf cocoapi && git clone https://github.com/cocodataset/cocoapi && cd cocoapi/PythonAPI && make && cd ../.. && cp -r cocoapi/PythonAPI/pycocotools yolov3
 cd yolov3
  
-python3 test.py --save-json --conf-thres 0.001 --img-size 608 --batch-size 16
-Namespace(batch_size=16, cfg='cfg/yolov3.cfg', conf_thres=0.001, data_cfg='cfg/coco.data', img_size=608, iou_thres=0.5, nms_thres=0.5, save_json=True, weights='weights/yolov3.weights')
-Using cuda _CudaDeviceProperties(name='Tesla V100-SXM2-16GB', major=7, minor=0, total_memory=16130MB, multi_processor_count=80)
-      Image      Total          P          R        mAP
-Calculating mAP: 100%|█████████████████████████████████| 313/313 [08:54<00:00,  1.55s/it]
-       5000       5000     0.0966      0.786      0.579
- Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.331
- Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.582
- Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.344
- Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.198
- Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.362
- Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.427
- Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.281
- Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.437
- Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.463
- Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.309
- Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.494
- Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.577
- 
-python3 test.py --weights weights/yolov3-spp.weights --cfg cfg/yolov3-spp.cfg --save-json --img-size 608 --batch-size 8
-Namespace(batch_size=8, cfg='cfg/yolov3-spp.cfg', conf_thres=0.001, data_cfg='data/coco.data', img_size=608, iou_thres=0.5, nms_thres=0.5, save_json=True, weights='weights/yolov3-spp.weights')
-Using cuda _CudaDeviceProperties(name='Tesla V100-SXM2-16GB', major=7, minor=0, total_memory=16130MB, multi_processor_count=80)
-       Image      Total          P          R        mAP
-Calculating mAP: 100%|█████████████████████████████████| 625/625 [07:01<00:00,  1.56it/s]
-       5000       5000       0.12       0.81      0.611
- Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.366
- Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.607
- Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.386
- Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.207
- Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.391
- Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.485
- Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.296
- Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.464
- Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.494
- Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.331
- Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.517
- Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.618
+Use below command to test the official YOLOv3 weights
+python3 coco_predict.py --save-json --conf-thres 0.001 --img-size 416 --batch-size 16
+- Compare to darknet published results https://arxiv.org/abs/1804.02767.
 ```
 
-# Citation
-
-[![DOI](https://zenodo.org/badge/146165888.svg)](https://zenodo.org/badge/latestdoi/146165888)
-
-# Contact
-
-Issues should be raised directly in the repository. For additional questions or comments please email Glenn Jocher at glenn.jocher@ultralytics.com or visit us at https://contact.ultralytics.com.
