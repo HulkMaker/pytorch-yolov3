@@ -1,3 +1,8 @@
+"""
+Created on April, 2019
+@authors: Hulking
+"""
+
 import argparse
 import time
 
@@ -9,7 +14,9 @@ from models import *
 from utils.datasets import *
 from utils.utils import *
 
-
+"""
+训练
+"""
 def train(
         cfg,
         data_cfg,
@@ -207,7 +214,9 @@ def train(
             # Delete checkpoint
             del chkpt
 
-
+"""
+训练参数
+"""
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--epochs', type=int, default=273, help='number of epochs')

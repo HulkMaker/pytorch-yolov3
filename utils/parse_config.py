@@ -1,3 +1,8 @@
+"""
+Created on April, 2019
+@authors: Hulking
+"""
+
 def parse_model_cfg(path):
     """Parses the yolo-v3 layer configuration file and returns module definitions"""
     file = open(path, 'r')

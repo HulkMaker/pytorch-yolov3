@@ -1,3 +1,7 @@
+"""
+Created on April, 2019
+@authors: Hulking
+"""
 import argparse
 import time
 from sys import platform
@@ -6,7 +10,9 @@ from models import *
 from utils.datasets import *
 from utils.utils import *
 
-
+"""
+对单个图片/视频/摄像头数据流进行预测，并将绘制的结果保存
+"""
 def detect(
         cfg,
         data_cfg,

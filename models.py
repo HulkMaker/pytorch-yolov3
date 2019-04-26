@@ -1,13 +1,22 @@
+"""
+Created on April, 2019
+@authors: Hulking
+"""
+
 import os
-
 import torch.nn.functional as F
-
 from utils.parse_config import *
 from utils.utils import *
 
 ONNX_EXPORT = False
 
+"""
+针对YOLO模型的定义和基本操作
+"""
 
+"""
+模型创建
+"""
 def create_modules(module_defs):
     """
     Constructs module list of layer blocks from module configuration in module_defs
@@ -86,7 +95,9 @@ class EmptyLayer(nn.Module):
     def forward(self, x):
         return x
 
-
+"""
+对特征图进行上采样操作的函数
+"""
 class Upsample(nn.Module):
     # Custom Upsample layer (nn.Upsample gives deprecated warning message)
 
@@ -98,8 +109,13 @@ class Upsample(nn.Module):
     def forward(self, x):
         return F.interpolate(x, scale_factor=self.scale_factor, mode=self.mode)
 
-
+"""
+模型最后一层：YOLO层
+"""
 class YOLOLayer(nn.Module):
+    """
+    初始化
+    """
     def __init__(self, anchors, nC, img_size, yolo_layer, cfg):
         super(YOLOLayer, self).__init__()
 
@@ -118,6 +134,9 @@ class YOLOLayer(nn.Module):
             nG = int(img_size / stride)  # number grid points
             create_grids(self, img_size, nG)
 
+    """
+    前向传播函数
+    """
     def forward(self, p, img_size, var=None):
         if ONNX_EXPORT:
             bs, nG = 1, self.nG  # batch size, grid size
@@ -167,7 +186,9 @@ class YOLOLayer(nn.Module):
             # reshape from [1, 3, 13, 13, 85] to [1, 507, 85]
             return io.view(bs, -1, 5 + self.nC), p
 
-
+"""
+骨干网络，输出特征图
+"""
 class Darknet(nn.Module):
     """YOLOv3 object detection model"""
 
@@ -212,12 +233,16 @@ class Darknet(nn.Module):
             io, p = list(zip(*output))  # inference output, training output
             return torch.cat(io, 1), p
 
-
+"""
+输出不同尺度的特征图
+"""
 def get_yolo_layers(model):
     a = [module_def['type'] == 'yolo' for module_def in model.module_defs]
     return [i for i, x in enumerate(a) if x]  # [82, 94, 106] for yolov3
 
-
+"""
+对特征图划分网格，以便后续检测
+"""
 def create_grids(self, img_size, nG, device='cpu'):
     self.img_size = img_size
     self.stride = img_size / nG
@@ -232,7 +257,9 @@ def create_grids(self, img_size, nG, device='cpu'):
     self.anchor_wh = self.anchor_vec.view(1, self.nA, 1, 1, 2).to(device)
     self.nG = torch.FloatTensor([nG]).to(device)
 
-
+"""
+加载权重文件
+"""
 def load_darknet_weights(self, weights, cutoff=-1):
     # Parses and loads the weights stored in 'weights'
     # cutoff: save layers between 0 and cutoff (if cutoff = -1 all are saved)
@@ -300,7 +327,9 @@ def load_darknet_weights(self, weights, cutoff=-1):
 
     return cutoff
 
-
+"""
+保存权重文件
+"""
 def save_weights(self, path, cutoff=-1):
     fp = open(path, 'wb')
     self.header_info[3] = self.seen  # number of images seen during training

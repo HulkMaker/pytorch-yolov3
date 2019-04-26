@@ -16,11 +16,7 @@ from utils.utils import *
 from pycocotools.coco import COCO
 from pycocotools.cocoeval import COCOeval
 
-
-"""
-加载模型，预测结果，保存成json文件，然后使用cocoapi接口计算mAP
-"""
-def predict_and_eval(
+def test(
         cfg,
         data_cfg,
         weights,
