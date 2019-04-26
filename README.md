@@ -51,7 +51,6 @@ Reflection | 50% probability (horizontal-only)
 H**S**V Saturation | +/- 50%
 HS**V** Intensity | +/- 50%
 
-<img src="https://user-images.githubusercontent.com/26833433/50525037-6cbcbc00-0ad9-11e9-8c38-9fd51af530e0.jpg">
 
 ## Speed
 
@@ -83,12 +82,6 @@ Run `detect.py` to apply trained weights to an image, such as `zidane.jpg` from 
 **YOLOv3:** `python3 detect.py --cfg cfg/yolov3.cfg --weights weights/yolov3.weights`
 <img src="https://user-images.githubusercontent.com/26833433/50524393-b0adc200-0ad5-11e9-9335-4774a1e52374.jpg" width="600">
 
-**YOLOv3-tiny:** `python3 detect.py --cfg cfg/yolov3-tiny.cfg --weights weights/yolov3-tiny.weights`
-<img src="https://user-images.githubusercontent.com/26833433/50374155-21427380-05ea-11e9-8d24-f1a4b2bac1ad.jpg" width="600">
-
-**YOLOv3-SPP:** `python3 detect.py --cfg cfg/yolov3-spp.cfg --weights weights/yolov3-spp.weights`
-<img src="https://user-images.githubusercontent.com/26833433/54747926-e051ff00-4bd8-11e9-8b5d-93a41d871ec7.jpg" width="600">
-
 ## Webcam
 
 Run `detect.py` with `webcam=True` to show a live webcam feed.
@@ -100,9 +93,10 @@ Run `detect.py` with `webcam=True` to show a live webcam feed.
 
 # mAP
 
-- Use `coco_predict.py --weights weights/yolov3.weights` to test the official YOLOv3 weights.
-- Use `coco_predict.py --weights weights/latest.pt` to test the latest training results.
-
+- Use `python coco_predict.py --weights weights/yolov3.weights` to test the official YOLOv3 weights.
+- Use `python coco_predict.py --weights weights/latest.pt` to test the latest training results.
+- Use `python coco_predict.py --save-json --conf-thres 0.001 --img-size 416 --batch-size 16` to modify configuration.
+- Compare to darknet published results https://arxiv.org/abs/1804.02767.
 
 
 ``` bash
@@ -110,9 +104,5 @@ sudo rm -rf yolov3 && git clone https://github.com/ultralytics/yolov3
 # bash yolov3/data/get_coco_dataset.sh
 sudo rm -rf cocoapi && git clone https://github.com/cocodataset/cocoapi && cd cocoapi/PythonAPI && make && cd ../.. && cp -r cocoapi/PythonAPI/pycocotools yolov3
 cd yolov3
- 
-Use below command to test the official YOLOv3 weights
-python3 coco_predict.py --save-json --conf-thres 0.001 --img-size 416 --batch-size 16
-- Compare to darknet published results https://arxiv.org/abs/1804.02767.
 ```
 
