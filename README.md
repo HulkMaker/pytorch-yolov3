@@ -96,10 +96,14 @@ Run `detect.py` with `webcam=True` to show a live webcam feed.
 # mAP
 
 ``` bash
+1.下载代码
 sudo rm -rf pytorch-yolov3 && git clone https://github.com/muyiguangda/pytorch-yolov3
-# bash pytorch-yolov3/data/get_coco_dataset.sh
-sudo rm -rf cocoapi && git clone https://github.com/cocodataset/cocoapi && cd cocoapi/PythonAPI && make && cd ../.. && cp -r cocoapi/PythonAPI/pycocotools pytorch-yolov3
+2.获取数据集(可选)
+bash pytorch-yolov3/data/get_coco_dataset.sh
+3.配置cocoapi环境
 cd pytorch-yolov3
+sudo rm -rf cocoapi && git clone https://github.com/cocodataset/cocoapi && cd cocoapi/PythonAPI && make && cd ../.. && cp -r cocoapi/PythonAPI/pycocotools .
+4.计算mAP
 ```
 - Use `python coco_predict.py --weights weights/yolov3.weights` to test the official YOLOv3 weights.
 - Use `python coco_predict.py --weights weights/latest.pt` to test the latest training results.
